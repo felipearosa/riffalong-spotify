@@ -1,0 +1,19 @@
+{
+  "name": "riffalong-spotify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipearosa/riffalong-spotify.git"
+  },
+  "author": "Felipe Arosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipearosa/riffalong-spotify/issues"
+  },
+  "homepage": "https://github.com/felipearosa/riffalong-spotify#readme"
+}
