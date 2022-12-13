@@ -1,12 +1,16 @@
+import { Route, Routes  } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Login'
-import Dashboard from './Dashboard';
 
-const code = new URLSearchParams(window.location.search).get('code');
+import Home from "./Home";
+import Song from "./pages/Song";
+
 
 function App() {
   return (
-    code ? <Dashboard code={code} /> : <Login />
+    <Routes>
+      <Route path="/" exact element={<Home />} />
+      <Route path="/song" exact element={<Song />} />
+    </Routes>
   );
 }
 
