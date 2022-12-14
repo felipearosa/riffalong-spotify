@@ -22,7 +22,6 @@ const MainHeader = () => {
             <Login />
           </li>
         </ul>
-
       </nav>
     </header>
   );
