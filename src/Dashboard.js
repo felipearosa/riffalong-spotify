@@ -4,13 +4,16 @@ import useAuth from "./hooks/useAuth"
 import SpotifyWebApi from "spotify-web-api-node";
 import TrackSearchResult from "./TrackSearchResult";
 import Player from "./Player";
+import { useSelector } from "react-redux";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: '7ea15b8610d0483f946cdf7ea8615253'
 })
 
-const Dashboard = ({ code }) => {
-  const accessToken = useAuth(code);
+const Dashboard = () => {
+  const code = useSelector(state => state.auth.code);
+  const accessToken = useSelector(state => state.auth.accessToken);
+  useAuth(code);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();

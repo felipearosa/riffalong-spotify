@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/auth";
+
 
 const useAuth = (code) => {
-  const [accessToken, setAccessToken] = useState();
-  const [refreshToken, setRefreshToken] = useState();
-  const [expiresIn, setExpiresIn] = useState();
+  const dispatch = useDispatch()
+  const accessToken = useSelector(state => state.auth.accessToken)
+  const refreshToken = useSelector(state => state.auth.refreshToken)
+  const expiresIn = useSelector(state => state.auth.expiresIn)
+
 
   useEffect(() => {
     axios.post("http://localhost:3001/login/", {
       code,
     }).then(res => {
-      setAccessToken(res.data.accessToken);
-      setRefreshToken(res.data.refreshToken);
-      setExpiresIn(res.data.expiresIn);
+      //setAccessToken(res.data.accessToken);
+      dispatch(authActions.setAccessToken({ accessToken: res.data.accessToken }));
+      dispatch(authActions.setRefreshToken({ refreshToken: res.data.refreshToken }));
+      dispatch(authActions.setExpiresIn({ expiresIn: res.data.expiresIn }));
+
+      const expiresDate = Date.now() + res.data.expiresIn * 1000
+      // console.log(Date.now());
+      // console.log(expiresDate)
+
+      console.log(typeof (window.localStorage.getItem('expirationDate') * 1))
+      window.localStorage.setItem('code', code);
+      window.localStorage.setItem('expirationDate', expiresDate);
+
+
       window.history.pushState({}, null, "/");
     }).catch((err) => {
       console.log(err)
@@ -21,14 +37,14 @@ const useAuth = (code) => {
   }, [code])
 
   useEffect(() => {
-    if(!refreshToken || !expiresIn) return
+    if (!refreshToken || !expiresIn) return
 
     const interval = setInterval(() => {
       axios.post("http://localhost:3001/refresh", {
         refreshToken,
       }).then(res => {
-        setAccessToken(res.data.accessToken);
-        setExpiresIn(res.data.expiresIn);
+        dispatch(authActions.setAccessToken({ accessToken: res.data.accessToken }));
+        dispatch(authActions.setExpiresIn({ expiresIn: res.data.expiresIn }));
       }).catch(() => {
         window.location = '/'
       })
@@ -36,8 +52,6 @@ const useAuth = (code) => {
 
     return () => clearInterval(interval)
   }, [refreshToken, expiresIn])
-
-  return accessToken;
 }
 
 export default useAuth
