@@ -10,8 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     const receivedCode = new URLSearchParams(window.location.search).get('code');
-    dispatch(authActions.setCode({ code:receivedCode }))
-    console.log(receivedCode)
+    dispatch(authActions.setCode({ code:receivedCode }));
   }, [])
 
   return (

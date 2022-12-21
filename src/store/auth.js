@@ -5,6 +5,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   expiresIn: null,
+  code: null,
   isLoggedIn: false
 }
 
