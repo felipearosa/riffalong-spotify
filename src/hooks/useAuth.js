@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth";
+import { useNavigate } from "react-router-dom";
 
 
 const useAuth = (code) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = useSelector(state => state.auth.accessToken)
   const refreshToken = useSelector(state => state.auth.refreshToken)
   const expiresIn = useSelector(state => state.auth.expiresIn)
@@ -26,11 +27,11 @@ const useAuth = (code) => {
       // console.log(expiresDate)
 
       console.log(typeof (window.localStorage.getItem('expirationDate') * 1))
-      window.localStorage.setItem('code', code);
-      window.localStorage.setItem('expirationDate', expiresDate);
+      window.localStorage.setItem('accessToken', res.data.accessToken);
+      window.localStorage.setItem('expirationDate', res.data.expiresIn );
 
-
-      window.history.pushState({}, null, "/");
+      navigate(-1)
+      //window.history.pushState({}, null, "/");
     }).catch((err) => {
       console.log(err)
       window.location = '/'

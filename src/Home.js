@@ -10,7 +10,7 @@ const Home = () => {
   const code = new URLSearchParams(window.location.search).get('code');
 
   return (
-    code ? <LogUserIn /> : <Login />
+    code ? <LogUserIn code={code} /> : <Login />
   )
 }
 

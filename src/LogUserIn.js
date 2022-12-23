@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
 import useAuth from "./hooks/useAuth";
 
-const LogUserIn = () => {
-  const code = useSelector(state => state.auth.code);
+const LogUserIn = ({ code }) => {
   useAuth(code);
+
+  return (
+    <div>user logged</div>
+  )
 }
 
 export default LogUserIn

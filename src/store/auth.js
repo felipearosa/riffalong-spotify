@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-let accessToken = localStorage.getItem('accessToken')
+let accessToken = localStorage.getItem('accessToken');
+
+console.log('test')
 
 const initialState = {
   accessToken,
