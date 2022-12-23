@@ -1,9 +1,13 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Login from '../Login';
+import Logout from '../Logout';
 
 import classes from './MainHeader.module.css';
 
 const MainHeader = () => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+
   return (
     <header className={classes.header}>
       <nav>
@@ -19,7 +23,8 @@ const MainHeader = () => {
             </NavLink>
           </li>
           <li>
-            <Login />
+            {!isLoggedIn && <Login />}
+            {isLoggedIn && <Logout />}
           </li>
         </ul>
       </nav>
