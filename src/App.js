@@ -6,9 +6,12 @@ import MainHeader from "./components/MainHeader";
 import Home from "./Home";
 import Song from "./pages/Song";
 import Dashboard from "./Dashboard";
+import useCheckLogin from "./hooks/useCheckLogin";
 
 
 function App() {
+  useCheckLogin();
+
   return (
     <Fragment>
       <MainHeader />
