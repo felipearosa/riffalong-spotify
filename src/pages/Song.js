@@ -3,15 +3,12 @@ import { authActions } from "../store/auth";
 
 const Song = () => {
   const dispatch = useDispatch();
-  const testcode = useSelector(state => state.auth.testcode)
-
-  const testHandler = () => {
-    dispatch(authActions.testFunc())
-  }
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
   return (
+    <h2>{isLoggedIn}</h2>
 
-    <div onClick={testHandler}>{testcode}</div>
+    // <div onClick={testHandler}>{testcode}</div>
   )
 }
 

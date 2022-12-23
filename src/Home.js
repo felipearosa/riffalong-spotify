@@ -3,18 +3,14 @@ import Dashboard from './Dashboard';
 import { useEffect } from 'react';
 import { authActions } from './store/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import useAuth from './hooks/useAuth';
+import LogUserIn from './LogUserIn';
 
 const Home = () => {
-  const code = useSelector(state => state.auth.code)
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const receivedCode = new URLSearchParams(window.location.search).get('code');
-    dispatch(authActions.setCode({ code:receivedCode }));
-  }, [])
+  const code = new URLSearchParams(window.location.search).get('code');
 
   return (
-    code ? <Dashboard /> : <Login />
+    code ? <LogUserIn /> : <Login />
   )
 }
 

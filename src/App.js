@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import MainHeader from "./components/MainHeader";
 import Home from "./Home";
 import Song from "./pages/Song";
+import Dashboard from "./Dashboard";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/song" exact element={<Song />} />
+        <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
     </Fragment>
   );
