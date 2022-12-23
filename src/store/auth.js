@@ -1,15 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
+
 
 let accessToken = localStorage.getItem('accessToken');
+let expirationDate = localStorage.getItem('expirationDate') * 1;
+let expiresInSec = (expirationDate - Date.now()) / 1000
 
-console.log('test')
+console.log(expiresInSec);
+
+if (expiresInSec < 0) {
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('expirationDate')
+} else if (expiresInSec < 1800  ) {
+  console.log('needs to refresh')
+}
 
 const initialState = {
   accessToken,
   refreshToken: null,
-  expiresIn: null,
-  code: null,
+  expireDate: null,
   isLoggedIn: !!accessToken
 }
 
@@ -23,8 +33,8 @@ const authSlice = createSlice({
     setAccessToken(state, action){
       state.accessToken = action.payload.accessToken
     },
-    setExpiresIn(state, action){
-      state.expiresIn = action.payload.expiresIn
+    setExpireDate(state, action){
+      state.expireDate = action.payload.expireDate
     },
     setRefreshToken(state, action){
       state.refreshToken = action.payload.refreshToken

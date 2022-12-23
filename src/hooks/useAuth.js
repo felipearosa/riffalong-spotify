@@ -10,50 +10,51 @@ const useAuth = (code) => {
   const navigate = useNavigate();
   const accessToken = useSelector(state => state.auth.accessToken)
   const refreshToken = useSelector(state => state.auth.refreshToken)
-  const expiresIn = useSelector(state => state.auth.expiresIn)
+  const expireDate = useSelector(state => state.auth.expireDate);
+  const [expiresIn, setExpiresIn] = useState();
 
 
   useEffect(() => {
     axios.post("http://localhost:3001/login/", {
       code,
     }).then(res => {
-      //setAccessToken(res.data.accessToken);
+      const newExpireDate = Date.now() + res.data.expiresIn * 1000;
+      window.localStorage.setItem('accessToken', res.data.accessToken);
+      window.localStorage.setItem('expirationDate', newExpireDate);
+
       dispatch(authActions.setAccessToken({ accessToken: res.data.accessToken }));
       dispatch(authActions.setRefreshToken({ refreshToken: res.data.refreshToken }));
-      dispatch(authActions.setExpiresIn({ expiresIn: res.data.expiresIn }));
+      dispatch(authActions.setExpireDate({ expireDate: newExpireDate }));
 
-      const expiresDate = Date.now() + res.data.expiresIn * 1000
-      // console.log(Date.now());
-      // console.log(expiresDate)
-
-      console.log(typeof (window.localStorage.getItem('expirationDate') * 1))
-      window.localStorage.setItem('accessToken', res.data.accessToken);
-      window.localStorage.setItem('expirationDate', res.data.expiresIn );
-
-      navigate(-1)
+      //navigate(-1)
       //window.history.pushState({}, null, "/");
     }).catch((err) => {
       console.log(err)
-      window.location = '/'
+      //window.location = '/'
     })
   }, [code])
 
   useEffect(() => {
-    if (!refreshToken || !expiresIn) return
+    if (!refreshToken || !expireDate) return
 
     const interval = setInterval(() => {
+      console.log('changed')
       axios.post("http://localhost:3001/refresh", {
         refreshToken,
       }).then(res => {
+        const newExpireDate = Date.now() + res.data.expiresIn * 1000;
+        window.localStorage.setItem('accessToken', res.data.accessToken);
+        window.localStorage.setItem('expirationDate', newExpireDate);
+
         dispatch(authActions.setAccessToken({ accessToken: res.data.accessToken }));
-        dispatch(authActions.setExpiresIn({ expiresIn: res.data.expiresIn }));
+        dispatch(authActions.setExpireDate({ expireDate: newExpireDate }));
       }).catch(() => {
         window.location = '/'
       })
-    }, (expiresIn - 60) * 1000);
+    }, 1800 * 1000);
 
     return () => clearInterval(interval)
-  }, [refreshToken, expiresIn])
+  }, [refreshToken, expireDate])
 }
 
 export default useAuth
