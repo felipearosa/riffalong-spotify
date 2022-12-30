@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const initialState = {
   accessToken: null,
   refreshToken: null,
-  expiresIn: null,
-  code: null,
+  expireDate: null,
   isLoggedIn: false
 }
 
@@ -13,21 +11,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCode(state, action){
-      state.code = action.payload.code
-    },
-    setAccessToken(state, action){
+    setAccessToken(state, action) {
       state.accessToken = action.payload.accessToken
     },
-    setExpiresIn(state, action){
-      state.expiresIn = action.payload.expiresIn
+    setExpireDate(state, action) {
+      state.expireDate = action.payload.expireDate
     },
-    setRefreshToken(state, action){
+    setRefreshToken(state, action) {
       state.refreshToken = action.payload.refreshToken
     },
-    setIsLoggedIn(state, action){
+    setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload.isLoggedIn
+    },
+    setTokensAndExpire(state, action) {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.expireDate = action.payload.expireDate;
+      state.isLoggedIn = action.payload.isLoggedIn;
     }
+
   }
 })
 
