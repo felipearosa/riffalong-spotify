@@ -13,6 +13,7 @@ const Song = () => {
 
   const getTimeHandler = () => {
     //something to get time from player
+    setIsRecording(!isRecording)
   }
 
   return (

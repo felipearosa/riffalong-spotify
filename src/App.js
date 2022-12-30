@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import MainHeader from "./components/Layout/MainHeader";
 import Home from "./Home";
 import Song from "./pages/Song";
+import WebPlayBack from "./pages/WebPlayBack";
 import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/song" exact element={<Song />} />
+        <Route path="/webplayback" exact element={<WebPlayBack />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
     </Fragment>

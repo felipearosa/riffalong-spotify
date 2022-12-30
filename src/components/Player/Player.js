@@ -1,19 +1,40 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import SpotifyWebPlayer from "react-spotify-web-playback"
 
-const Player = ({ accessToken, trackUri }) => {
+
+const Player = ({ accessToken, trackUri, isRecording }) => {
   const [play, setPlay] = useState(false);
   const [riffTime, setRiffTime] = useState();
-  const [isRecording, setIsRecording] = useState(false);
 
-  if(!accessToken) return null
+  const stateHandler = state => {
+    console.log(state.progressMs)
+    setRiffTime(state.progressMs)
+    if (!state.isPlaying) setPlay(true)
+  }
+
+  useEffect(() => {
+    axios.get('https://api.spotify.com/v1/me/player', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }).then(response => {
+      console.log(response.data.progress_ms)
+    }).catch(err => {
+      console.log('ERRRR', err.message)
+    })
+    console.log(riffTime)
+  }, [isRecording])
+
+
+  if (!accessToken) return null
 
   return <SpotifyWebPlayer
     token={accessToken}
     showSaveIcon
-    callback={state => {
-      if(!state.isPlaying) setPlay(true)
-    }}
+    callback={stateHandler}
     play={play}
     uris={trackUri ? [trackUri] : []}
   />
