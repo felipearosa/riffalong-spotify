@@ -1,26 +1,31 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNewToken } from "../helpers/tokenHelpers";
 import { authActions } from "../store/auth";
 
 const useCheckLogin = () => {
   const dispatch = useDispatch();
 
+
   setTimeout(() => {
     let accessToken = localStorage.getItem('accessToken');
     let refreshToken = localStorage.getItem('refreshToken');
-    let expirationDate = localStorage.getItem('expirationDate') * 1;
-    let expiresInSec = (expirationDate - Date.now()) / 1000;
+    let expireDate = localStorage.getItem('expireDate') * 1;
+    if(!expireDate) return
+
+    let expiresInSec = (expireDate - Date.now()) / 1000;
+
+    console.log(expireDate)
     console.log(expiresInSec)
     if (expiresInSec < 0) {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      localStorage.removeItem('expirationDate');
+      localStorage.removeItem('expireDate');
     } else if (expiresInSec < 1800) {
       getNewToken(refreshToken, dispatch);
-    } else if (expiresInSec) {
-      dispatch(authActions.setTokensAndExpire({accessToken, refreshToken, expirationDate, isLoggedIn: true}))
+    } else if (expiresInSec < 3600) {
+      dispatch(authActions.setTokensAndExpire({ accessToken, refreshToken, expireDate, isLoggedIn: true }))
     }
-  }, 1500);
+  }, 50);
 
 }
 

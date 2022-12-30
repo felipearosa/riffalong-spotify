@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { Fragment } from "react";
 import useAuth from "./hooks/useAuth";
 
-const LogUserIn = ({ code }) => {
-  useAuth(code);
+const LogUserIn = props => {
+  useAuth(props.code);
 
   return (
-    <div>user logged</div>
+    <Fragment>{props.children}</Fragment>
   )
 }
 

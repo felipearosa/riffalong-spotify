@@ -6,7 +6,7 @@ import Logout from '../Logout';
 import classes from './MainHeader.module.css';
 
 const MainHeader = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
     <header className={classes.header}>

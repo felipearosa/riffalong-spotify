@@ -11,12 +11,14 @@ const Logout = () => {
     dispatch(authActions.setTokensAndExpire({
       accessToken: null,
       refreshToken: null,
-      expirationDate: null,
+      expireDate: null,
       isLoggedIn: false
     }))
+    console.log('removing...')
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('expireDate');
+    console.log('removed')
   };
 
   return (
