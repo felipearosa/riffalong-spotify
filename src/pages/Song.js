@@ -1,15 +1,24 @@
-import { useDispatch, useSelector } from "react-redux"
-import { authActions } from "../store/auth";
+import { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux"
+import { useLocation } from "react-router-dom";
+import Player from "../Player";
 
 const Song = () => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn).toString()
-  const accessToken = useSelector(state => state.auth.accessToken)
-  console.log('yoooo', accessToken)
+  const location = useLocation();
+  const [playingTrack, setPlayingTrack] = useState();
+  const accessToken = useSelector(state => state.auth.accessToken);
+  const track = location.state.track
+  console.log(accessToken)
+
+  useEffect(() => {
+    setPlayingTrack(track)
+  },[])
+
 
   return (
-    <h2>{isLoggedIn}</h2>
-
+    <Fragment>
+      <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
+    </Fragment>
     // <div onClick={testHandler}>{testcode}</div>
   )
 }
