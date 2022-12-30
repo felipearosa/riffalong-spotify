@@ -3,6 +3,8 @@ import SpotifyWebPlayer from "react-spotify-web-playback"
 
 const Player = ({ accessToken, trackUri }) => {
   const [play, setPlay] = useState(false);
+  const [riffTime, setRiffTime] = useState();
+  const [isRecording, setIsRecording] = useState(false);
 
   if(!accessToken) return null
 

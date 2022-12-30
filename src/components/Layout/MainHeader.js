@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Login from '../Login';
-import Logout from '../Logout';
+import Login from '../Login/Login';
+import Logout from '../Login/Logout';
 
 import classes from './MainHeader.module.css';
 

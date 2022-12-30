@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Fragment } from "react";
 
-import MainHeader from "./components/MainHeader";
+import MainHeader from "./components/Layout/MainHeader";
 import Home from "./Home";
 import Song from "./pages/Song";
-import Dashboard from "./Dashboard";
+import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
 
 

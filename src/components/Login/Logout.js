@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import { authActions } from "./store/auth";
+import { authActions } from "../../store/auth";
 
 const Logout = () => {
   const dispatch = useDispatch();
