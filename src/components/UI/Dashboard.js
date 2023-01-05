@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import useAuth from "./hooks/useAuth"
 import SpotifyWebApi from "spotify-web-api-node";
 import TrackSearchResult from "./TrackSearchResult";
-import Player from "./Player";
+import Player from "../Player/Player";
 import { useSelector } from "react-redux";
 
 const spotifyApi = new SpotifyWebApi({

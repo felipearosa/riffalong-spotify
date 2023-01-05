@@ -1,10 +1,5 @@
-import Login from './Login'
-import Dashboard from './Dashboard';
-import { useEffect } from 'react';
-import { authActions } from './store/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import useAuth from './hooks/useAuth';
-import LogUserIn from './LogUserIn';
+import Login from './components/Login/Login'
+import LogUserIn from './components/Login/LogUserIn';
 
 const Home = () => {
   const code = new URLSearchParams(window.location.search).get('code');

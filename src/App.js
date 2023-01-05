@@ -2,10 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Fragment } from "react";
 
-import MainHeader from "./components/MainHeader";
+import MainHeader from "./components/Layout/MainHeader";
 import Home from "./Home";
 import Song from "./pages/Song";
-import Dashboard from "./Dashboard";
+import WebPlayBack from "./pages/WebPlayBack";
+import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
 
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/song" exact element={<Song />} />
+        <Route path="/webplayback" exact element={<WebPlayBack />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
     </Fragment>
