@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom";
-import Player from "../components/Player/Player";
 import { Container } from "react-bootstrap";
+
+import Player from "../components/Player/Player";
 import RecordingButtons from "../components/Song/RecordingButtons";
+import SolosTable from "../components/Song/SolosTable";
 
 const Song = () => {
 
@@ -27,7 +29,7 @@ const Song = () => {
 
       <div className="row">
         <div className="col-sm-12 col-md-6 p-3">
-          <div>this is where the tab goes</div>
+         <SolosTable />
         </div>
         <div className="col-sm-12 col-md-6">
           <div>this is where the tab goes</div>
