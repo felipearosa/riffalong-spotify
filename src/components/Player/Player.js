@@ -9,8 +9,7 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
   const [riffTime, setRiffTime] = useState();
 
   const stateHandler = state => {
-    console.log(state.progressMs)
-    setRiffTime(state.progressMs)
+    console.log(state)
     if (!state.isPlaying) setPlay(true)
   }
 

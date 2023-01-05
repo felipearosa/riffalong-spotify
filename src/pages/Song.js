@@ -26,7 +26,10 @@ const Song = () => {
               <Player accessToken={accessToken} trackUri={track?.uri} isRecording={isRecording} />
             </div>
             <div className="btn btn-success btn-lg" onClick={getTimeHandler}>
-              Test!
+              start!
+            </div>
+            <div className="btn btn-success btn-lg" onClick={getTimeHandler}>
+              stop!
             </div>
           </div>
           <div className="col-sm-12 col-md-6">
