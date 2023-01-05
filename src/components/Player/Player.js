@@ -29,7 +29,7 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
 
     axios({
       method: 'put',
-      url: 'https://api.spotify.com/v1/me/player/seek?position_ms=10000e0',
+      url: 'https://api.spotify.com/v1/me/player/seek?position_ms=100000',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
