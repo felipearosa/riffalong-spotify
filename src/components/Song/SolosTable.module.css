@@ -1,4 +1,7 @@
-.box{
-  border: 1px solid #000000;
-  padding: 10px;
+.solo-table {
+  width: 100%;
+}
+
+.solo-table td{
+  text-align: center;
 }
