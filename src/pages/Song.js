@@ -1,8 +1,9 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom";
 import Player from "../components/Player/Player";
 import { Container } from "react-bootstrap";
+import RecordingButtons from "../components/Song/RecordingButtons";
 
 const Song = () => {
 
@@ -17,29 +18,23 @@ const Song = () => {
   }
 
   return (
-    <Fragment>
-      <Container>
+    <Container>
+      <h1 className="my-4">Song by Artist</h1>
+      <div className="my-3">
+          <Player accessToken={accessToken} trackUri={track?.uri} isRecording={isRecording} />
+          <RecordingButtons setIsRecording={getTimeHandler} />
+      </div>
 
-        <div className="row">
-          <div className="col-sm-12 col-md-6">
-            <div>
-              <Player accessToken={accessToken} trackUri={track?.uri} isRecording={isRecording} />
-            </div>
-            <div className="btn btn-success btn-lg" onClick={getTimeHandler}>
-              start!
-            </div>
-            <div className="btn btn-success btn-lg" onClick={getTimeHandler}>
-              stop!
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6">
-            <div>this is where the table goes</div>
-          </div>
-
+      <div className="row">
+        <div className="col-sm-12 col-md-6 p-3">
+          <div>this is where the tab goes</div>
         </div>
-      </Container>
+        <div className="col-sm-12 col-md-6">
+          <div>this is where the tab goes</div>
+        </div>
 
-    </Fragment>
+      </div>
+    </Container>
   )
 }
 
