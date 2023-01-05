@@ -15,7 +15,9 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
   }
 
   useEffect(() => {
-    axios.get('https://api.spotify.com/v1/me/player', {
+    axios({
+      method: 'get',
+      url:'https://api.spotify.com/v1/me/player',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
@@ -25,7 +27,17 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
     }).catch(err => {
       console.log('ERRRR', err.message)
     })
-    console.log(riffTime)
+
+    axios({
+      method: 'put',
+      url: 'https://api.spotify.com/v1/me/player/seek?position_ms=10000e0',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }).catch(err => {
+      console.log('ERRRR', err.message)
+    })
   }, [isRecording])
 
 
