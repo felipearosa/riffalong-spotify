@@ -12,20 +12,6 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
     if (!state.isPlaying) setPlay(true)
   }
 
-  useEffect(() => {
-    axios({
-      method: 'put',
-      url: 'https://api.spotify.com/v1/me/player/seek?position_ms=100000',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    }).catch(err => {
-      console.log('ERRRR', err.message)
-    })
-  }, [isRecording])
-
-
   if (!accessToken) return null
 
   return <SpotifyWebPlayer

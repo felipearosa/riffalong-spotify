@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState } from 'react'
 
 import styles from './RecordingButtons.module.css'
@@ -7,17 +8,20 @@ import { useSelector } from 'react-redux';
 const RecordingButtons = props => {
   const accessToken = useSelector(state => state.auth.accessToken)
   const [isRecording, setIsRecording] = useState(false);
+  const [startingTime, setStartingTime] = useState(false);
+  const [endingTime, setEndingTime] = useState(false);
 
   const startTimeHandler = async () => {
-    //something to get time from player
-    const response = await getSongTime(accessToken);
-    console.log(response.data.progress_ms)
-    props.setIsRecording()
+    const startingTime = await getSongTime(accessToken);
+    setStartingTime(startingTime);
     setIsRecording(true);
   }
 
-  const endTimeHandler = () => {
+  const endTimeHandler = async () => {
+    const endingTime = await getSongTime(accessToken);
+    setEndingTime(endingTime);
     setIsRecording(false);
+    props.setIsRecording(startingTime, endingTime);
   }
 
   return (

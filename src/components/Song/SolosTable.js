@@ -1,6 +1,16 @@
 import styles from './SolosTable.module.css';
 
-const SolosTable = () => {
+const SolosTable = ({ time }) => {
+
+  console.log(time);
+  const solo = (
+    <tr>
+      <td>ok</td>
+      <td>{time.startingTime} - {time.endingTime}</td>
+      <td>X</td>
+    </tr>
+  )
+
   return (
     <table className={styles['solo-table']}>
       <thead>
@@ -16,6 +26,7 @@ const SolosTable = () => {
           <td>solo time</td>
           <td>X</td>
         </tr>
+        {solo}
       </tbody>
 
     </table>

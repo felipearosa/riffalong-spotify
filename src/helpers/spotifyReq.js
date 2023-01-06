@@ -10,10 +10,5 @@ export const getSongTime = async accessToken => {
     }
   })
 
-  return response
-  // .then(response => {
-  //   console.log(response.data.progress_ms)
-  // }).catch(err => {
-  //   console.log('ERRRR', err.message)
-  // })
+  return response.data.progress_ms
 }
