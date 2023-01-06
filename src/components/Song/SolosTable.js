@@ -1,12 +1,19 @@
 import styles from './SolosTable.module.css';
+import { playSolo } from '../../helpers/spotifyReq';
+import { useSelector } from 'react-redux';
 
 const SolosTable = ({ time }) => {
+  const accessToken = useSelector(state => state.auth.accessToken)
+
+  const test = async () => {
+    await playSolo(time.startingTime, time.endingTime, accessToken)
+  }
 
   console.log(time);
   const solo = (
     <tr>
       <td>ok</td>
-      <td>{time.startingTime} - {time.endingTime}</td>
+      <td onClick={test}>{time.startingTime} - {time.endingTime}</td>
       <td>X</td>
     </tr>
   )
