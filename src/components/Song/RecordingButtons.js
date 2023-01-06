@@ -1,11 +1,17 @@
 import { useState } from 'react'
+
 import styles from './RecordingButtons.module.css'
+import { getSongTime } from '../../helpers/spotifyReq';
+import { useSelector } from 'react-redux';
 
 const RecordingButtons = props => {
+  const accessToken = useSelector(state => state.auth.accessToken)
   const [isRecording, setIsRecording] = useState(false);
 
-  const startTimeHandler = () => {
+  const startTimeHandler = async () => {
     //something to get time from player
+    const response = await getSongTime(accessToken);
+    console.log(response.data.progress_ms)
     props.setIsRecording()
     setIsRecording(true);
   }

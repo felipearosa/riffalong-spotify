@@ -5,8 +5,8 @@ const SolosTable = () => {
     <table className={styles['solo-table']}>
       <thead>
         <tr>
-          <th class="text-center">Mastered</th>
-          <th class="text-center">Time</th>
+          <th className="text-center">Mastered</th>
+          <th className="text-center">Time</th>
           <th></th>
         </tr>
       </thead>

@@ -14,8 +14,6 @@ const useCheckLogin = () => {
 
     let expiresInSec = (expireDate - Date.now()) / 1000;
 
-    console.log(expireDate)
-    console.log(expiresInSec)
     if (expiresInSec < 0) {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');

@@ -41,18 +41,3 @@ const Song = () => {
 }
 
 export default Song
-
-
-// const Song = () => {
-//   const accessToken = useSelector(state => state.auth.accessToken);
-//   const location = useLocation();
-//   const track = location.state.track;
-
-//   return (
-//     <Fragment>
-//       <div><Player accessToken={accessToken} trackUri={track?.uri} /></div>
-//     </Fragment>
-//   )
-// }
-
-// export default Song
