@@ -5,3 +5,7 @@
 .solo-table td{
   text-align: center;
 }
+
+.active {
+  background-color: #ff0000;
+}

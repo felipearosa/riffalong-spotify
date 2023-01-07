@@ -2,11 +2,11 @@ import styles from './SolosButtons.module.css';
 import { playSolo } from '../../helpers/spotifyReq';
 import { useSelector } from 'react-redux';
 
-const SolosButtons = ({ soloTimes }) => {
+const SolosButtons = ({ soloTimes, activeSolo }) => {
   const accessToken = useSelector(state => state.auth.accessToken)
 
   const startSolo = async () => {
-    await playSolo(soloTimes.startingTime, soloTimes.endingTime, accessToken)
+    await playSolo(activeSolo.startingTime, activeSolo.endingTime, accessToken)
   }
 
   return (

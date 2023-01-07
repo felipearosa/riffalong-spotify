@@ -1,14 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import styles from './SolosTable.module.css';
+import { playSolo } from '../../helpers/spotifyReq';
+import MsToMin from '../../helpers/MsToMin';
 
+const SolosTable = ({ soloTimes, activateSolo }) => {
+  const accessToken = useSelector(state => state.auth.accessToken)
+  const [activeSolo, setActiveSolo] = useState();
 
-const SolosTable = ({ soloTimes }) => {
+  const activeHandler = async (solo, i) => {
+    if (i === activeSolo) return;
+    activateSolo(solo)
+    setActiveSolo(i)
+    await playSolo(solo.startingTime, solo.endingTime, accessToken)
+  }
 
-  const solos = soloTimes.map(solo => {
+  const solos = soloTimes.map((solo, i) => {
+    const startingSeconds = MsToMin(solo.startingTime)
+    const endingTime = MsToMin(solo.endingTime)
+
     return (
-      <tr>
+      <tr className={activeSolo === i ? styles.active : 'active'} key={i} onClick={() => activeHandler(solo, i)}>
         <td>ok</td>
-        <td>{solo.startingTime} - {solo.endingTime}</td>
+        <td>{startingSeconds} - {endingTime}</td>
         <td>X</td>
       </tr>
     )
