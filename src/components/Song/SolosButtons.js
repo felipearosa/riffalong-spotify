@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import styles from './SolosButtons.module.css';
 import { playSolo, pauseSolo } from '../../helpers/spotifyReq';
-import { useSelector } from 'react-redux';
-import { useEffect, useState, useRef } from 'react';
+import useLoop from '../../hooks/useLoop';
 
 let timeOut;
 
@@ -9,34 +11,11 @@ const SolosButtons = ({ activeSolo }) => {
   const accessToken = useSelector(state => state.auth.accessToken);
   const [loopActive, setLoopActive] = useState(false);
 
-  useEffect(() => {
-    if (!activeSolo) return;
-    let interval;
-    let pauseTimeout;
-
-    playSolo(activeSolo.startingTime, accessToken).then();
-
-    if (loopActive) {
-      interval = setInterval(async () => {
-        await playSolo(activeSolo.startingTime, accessToken);
-      }, activeSolo.endingTime - activeSolo.startingTime);
-    } else {
-      pauseTimeout = setTimeout(async () => {
-        await pauseSolo(accessToken)
-      }, activeSolo.endingTime - activeSolo.startingTime);
-    }
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [loopActive])
-
-
+  useLoop(activeSolo, loopActive)
 
   const loopHandler = () => {
     setLoopActive(prevState => !prevState);
   }
-
 
   const startSolo = async () => {
     await playSolo(activeSolo.startingTime, accessToken);
