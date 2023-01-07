@@ -14,7 +14,7 @@ const SolosBox = ({ soloTimes }) => {
   return (
     <div className={styles.box}>
       <h3>Loop</h3>
-      <SolosButtons soloTimes={soloTimes} activeSolo={activeSolo}/>
+      <SolosButtons activeSolo={activeSolo} />
       <SolosTable soloTimes={soloTimes} activateSolo={activateSolo} />
     </div>
   )

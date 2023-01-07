@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './SolosTable.module.css';
-import { playSolo } from '../../helpers/spotifyReq';
+import { pauseSolo, playSolo } from '../../helpers/spotifyReq';
 import MsToMin from '../../helpers/MsToMin';
 
 const SolosTable = ({ soloTimes, activateSolo }) => {
@@ -13,7 +13,10 @@ const SolosTable = ({ soloTimes, activateSolo }) => {
     if (i === activeSolo) return;
     activateSolo(solo)
     setActiveSolo(i)
-    await playSolo(solo.startingTime, solo.endingTime, accessToken)
+    await playSolo(solo.startingTime, accessToken)
+    setTimeout(async () => {
+      await pauseSolo(accessToken)
+    }, solo.endingTime - solo.startingTime);
   }
 
   const solos = soloTimes.map((solo, i) => {
