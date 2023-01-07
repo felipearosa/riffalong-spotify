@@ -33,15 +33,23 @@ export const playSolo = async (startTime, accessToken) => {
   });
 }
 
-export const pauseSolo = async accessToken => {
-  await axios({
-    method: 'put',
-    url: 'https://api.spotify.com/v1/me/player/pause',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  });
+let timeout;
+
+export const pauseSolo = async (accessToken, time) => {
+  if (timeout) {
+    clearTimeout(timeout)
+  }
+
+  timeout = setTimeout(async () => {
+    await axios({
+      method: 'put',
+      url: 'https://api.spotify.com/v1/me/player/pause',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+  }, time);
 }
 
 

@@ -9,7 +9,7 @@ const useLoop = (activeSolo, loopActive) => {
   useEffect(() => {
     if (!activeSolo) return;
     let interval;
-    let timeout;
+    const soloTime = activeSolo.endingTime - activeSolo.startingTime
 
     playSolo(activeSolo.startingTime, accessToken).then();
 
@@ -18,9 +18,7 @@ const useLoop = (activeSolo, loopActive) => {
         await playSolo(activeSolo.startingTime, accessToken);
       }, activeSolo.endingTime - activeSolo.startingTime);
     } else {
-      timeout = setTimeout(async () => {
-        await pauseSolo(accessToken)
-      }, activeSolo.endingTime - activeSolo.startingTime);
+      pauseSolo(accessToken, soloTime).then()
     }
 
     return () => {

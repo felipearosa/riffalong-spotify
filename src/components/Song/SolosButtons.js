@@ -17,20 +17,16 @@ const SolosButtons = ({ activeSolo }) => {
     setLoopActive(prevState => !prevState);
   }
 
-  const startSolo = async () => {
-    await playSolo(activeSolo.startingTime, accessToken);
-    if (timeOut) {
-      clearTimeout(timeOut)
-    }
-    timeOut = setTimeout(async () => {
-      await pauseSolo(accessToken);
-    }, activeSolo.endingTime - activeSolo.startingTime);
+  const startSoloHandler = async () => {
+    const soloTime = activeSolo.endingTime - activeSolo.startingTime
 
+    await playSolo(activeSolo.startingTime, accessToken);
+    await pauseSolo(accessToken, soloTime);
   }
 
   return (
     <div className={`row ${styles.container}`}>
-      <div onClick={startSolo} className={`btn btn-dark btn-lg col-sm-12 col-md-6 p-3`}>
+      <div onClick={startSoloHandler} className={`btn btn-dark btn-lg col-sm-12 col-md-6 p-3`}>
         start over!
       </div>
       <div onClick={loopHandler} className={`${loopActive ? styles.active : ''} btn btn-dark btn-lg col-sm-12 col-md-6 p-3`}>
