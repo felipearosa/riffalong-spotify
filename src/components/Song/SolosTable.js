@@ -1,22 +1,19 @@
+import { useEffect, useState } from 'react';
 import styles from './SolosTable.module.css';
-import { playSolo } from '../../helpers/spotifyReq';
-import { useSelector } from 'react-redux';
 
-const SolosTable = ({ time }) => {
-  const accessToken = useSelector(state => state.auth.accessToken)
 
-  const test = async () => {
-    await playSolo(time.startingTime, time.endingTime, accessToken)
-  }
+const SolosTable = ({ soloTimes }) => {
 
-  console.log(time);
-  const solo = (
-    <tr>
-      <td>ok</td>
-      <td onClick={test}>{time.startingTime} - {time.endingTime}</td>
-      <td>X</td>
-    </tr>
-  )
+  const solos = soloTimes.map(solo => {
+    return (
+      <tr>
+        <td>ok</td>
+        <td>{solo.startingTime} - {solo.endingTime}</td>
+        <td>X</td>
+      </tr>
+    )
+  })
+
 
   return (
     <table className={styles['solo-table']}>
@@ -33,7 +30,7 @@ const SolosTable = ({ time }) => {
           <td>solo time</td>
           <td>X</td>
         </tr>
-        {solo}
+        {solos}
       </tbody>
 
     </table>

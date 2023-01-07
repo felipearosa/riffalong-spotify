@@ -1,9 +1,17 @@
-import styles from './SolosButtons.module.css'
+import styles from './SolosButtons.module.css';
+import { playSolo } from '../../helpers/spotifyReq';
+import { useSelector } from 'react-redux';
 
-const SolosButtons = () => {
+const SolosButtons = ({ soloTimes }) => {
+  const accessToken = useSelector(state => state.auth.accessToken)
+
+  const startSolo = async () => {
+    await playSolo(soloTimes.startingTime, soloTimes.endingTime, accessToken)
+  }
+
   return (
     <div className={`row ${styles.container}`}>
-      <div className={`btn btn-dark btn-lg col-sm-12 col-md-6 p-3`}>
+      <div onClick={startSolo} className={`btn btn-dark btn-lg col-sm-12 col-md-6 p-3`}>
         start over!
       </div>
       <div className="btn btn-dark btn-lg col-sm-12 col-md-6 p-3">

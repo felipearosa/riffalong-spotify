@@ -12,6 +12,11 @@ const Player = ({ accessToken, trackUri, isRecording }) => {
     if (!state.isPlaying) setPlay(true)
   }
 
+  useEffect(() => {
+
+  }, [isRecording])
+
+
   if (!accessToken) return null
 
   return <SpotifyWebPlayer

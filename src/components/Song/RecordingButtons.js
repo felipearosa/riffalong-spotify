@@ -21,7 +21,7 @@ const RecordingButtons = props => {
     const endingTime = await getSongTime(accessToken);
     setEndingTime(endingTime);
     setIsRecording(false);
-    props.setIsRecording(startingTime, endingTime);
+    props.setSoloTime(startingTime, endingTime);
   }
 
   return (
