@@ -2,15 +2,13 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import styles from './SolosButtons.module.css';
-import { playSolo, pauseSolo } from '../../helpers/spotifyReq';
-import useLoop from '../../hooks/useLoop';
+import { playSolo } from '../../helpers/spotifyReq';
 
 
 const SolosButtons = ({ activeSolo }) => {
   const accessToken = useSelector(state => state.auth.accessToken);
   const [loopActive, setLoopActive] = useState(false);
 
-  //useLoop(activeSolo, loopActive)
   useEffect(() => {
     if (!activeSolo) return;
     if (loopActive) {

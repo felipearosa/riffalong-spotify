@@ -13,10 +13,6 @@ export const getSongTime = async accessToken => {
   return response.data.progress_ms
 }
 
-const timer = ms => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 let timeout;
 let interval;
 
@@ -52,28 +48,9 @@ export const pauseSolo = async (accessToken, time) => {
   }
 
   timeout = setTimeout(async () => {
-    await axios({
-      method: 'put',
-      url: 'https://api.spotify.com/v1/me/player/pause',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    });
+    await pauseReq(accessToken)
   }, time);
 }
-
-
-// export const loopSolo = async (startTime, endTime, accessToken) => {
-//   await seekPlayReq(startTime, accessToken);
-
-//   console.log(endTime - startTime)
-//   setInterval(async () => {
-//     console.log('should loop')
-//     await seekPlayReq(startTime, accessToken);
-//   }, endTime - startTime);
-// }
-
 
 
 // SPOTIFY REQ'S
