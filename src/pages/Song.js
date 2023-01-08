@@ -8,28 +8,28 @@ import RecordingButtons from "../components/Song/RecordingButtons";
 import SolosBox from "../components/Song/SolosBox";
 
 const Song = () => {
-
-  const [isRecording, setIsRecording] = useState(false);
+  const [soloTimes, setSoloTimes] = useState([]);
   const accessToken = useSelector(state => state.auth.accessToken);
   const location = useLocation();
   const track = location.state.track;
 
-  const getTimeHandler = () => {
-    //something to get time from player
-    setIsRecording(!isRecording)
+  const getTimeHandler = (startingTime, endingTime) => {
+    setSoloTimes(prevState => {
+      return [...prevState, {startingTime, endingTime}]
+    });
   }
 
   return (
     <Container>
       <h1 className="my-4">Song by Artist</h1>
       <div className="my-3">
-          <Player accessToken={accessToken} trackUri={track?.uri} isRecording={isRecording} />
-          <RecordingButtons setIsRecording={getTimeHandler} />
+        <Player accessToken={accessToken} trackUri={track?.uri} />
+        <RecordingButtons setSoloTime={getTimeHandler} />
       </div>
 
       <div className="row">
         <div className="col-sm-12 col-md-6 p-3">
-         <SolosBox />
+          <SolosBox soloTimes={soloTimes} />
         </div>
         <div className="col-sm-12 col-md-6">
           <div>this is where the tab goes</div>
@@ -41,18 +41,3 @@ const Song = () => {
 }
 
 export default Song
-
-
-// const Song = () => {
-//   const accessToken = useSelector(state => state.auth.accessToken);
-//   const location = useLocation();
-//   const track = location.state.track;
-
-//   return (
-//     <Fragment>
-//       <div><Player accessToken={accessToken} trackUri={track?.uri} /></div>
-//     </Fragment>
-//   )
-// }
-
-// export default Song
