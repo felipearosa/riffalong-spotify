@@ -26,7 +26,7 @@ export const playSolo = async (startingTime, endingTime, accessToken, loopActive
     interval = setInterval(() => {
       seekPlayReq(startingTime, accessToken).then();
       console.log(endingTime - startingTime)
-    }, (endingTime + 1000) - startingTime);
+    }, (endingTime + 500) - startingTime);
   } else {
     timeout = setTimeout(async () => {
       await axios({
