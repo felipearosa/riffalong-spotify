@@ -13,6 +13,10 @@ export const getSongTime = async accessToken => {
   return response.data.progress_ms
 }
 
+const timer = ms => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 let timeout;
 let interval;
 
@@ -23,10 +27,10 @@ export const playSolo = async (startingTime, endingTime, accessToken, loopActive
   await seekPlayReq(startingTime, accessToken);
 
   if (loopActive) {
-    interval = setInterval(() => {
-      seekPlayReq(startingTime, accessToken).then();
+    interval = setInterval(async () => {
+      await seekPlayReq(startingTime, accessToken);
       console.log(endingTime - startingTime)
-    }, (endingTime + 500) - startingTime);
+    }, (endingTime + 1000) - startingTime);
   } else {
     timeout = setTimeout(async () => {
       await axios({
@@ -41,9 +45,6 @@ export const playSolo = async (startingTime, endingTime, accessToken, loopActive
 
   }
 }
-
-
-
 
 export const pauseSolo = async (accessToken, time) => {
   if (timeout) {
