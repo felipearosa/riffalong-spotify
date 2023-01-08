@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './SolosTable.module.css';
 import MsToMin from '../../helpers/MsToMin';
+import { playSolo } from '../../helpers/spotifyReq';
 
 const SolosTable = ({ soloTimes, activateSolo }) => {
   const timerRef = useRef(null);

@@ -1,27 +1,36 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './SolosButtons.module.css';
 import { playSolo, pauseSolo } from '../../helpers/spotifyReq';
 import useLoop from '../../hooks/useLoop';
 
-let timeOut;
 
 const SolosButtons = ({ activeSolo }) => {
   const accessToken = useSelector(state => state.auth.accessToken);
   const [loopActive, setLoopActive] = useState(false);
 
-  useLoop(activeSolo, loopActive)
+  //useLoop(activeSolo, loopActive)
+  useEffect(() => {
+    if (!activeSolo) return;
+    if (loopActive) {
+      playSolo(activeSolo.startingTime, activeSolo.endingTime, accessToken, true).then();
+    } else {
+      playSolo(activeSolo.startingTime, activeSolo.endingTime, accessToken, false).then();
+    }
+  }, [loopActive, activeSolo])
 
   const loopHandler = () => {
     setLoopActive(prevState => !prevState);
   }
 
   const startSoloHandler = async () => {
-    const soloTime = activeSolo.endingTime - activeSolo.startingTime
-
-    await playSolo(activeSolo.startingTime, accessToken);
-    await pauseSolo(accessToken, soloTime);
+    if (loopActive) {
+      await playSolo(activeSolo.startingTime, activeSolo.endingTime, accessToken, true);
+    } else {
+      await playSolo(activeSolo.startingTime, activeSolo.endingTime, accessToken, false);
+    }
+    //await pauseSolo(accessToken, soloTime);
   }
 
   return (

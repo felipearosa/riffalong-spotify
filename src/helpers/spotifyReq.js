@@ -13,27 +13,37 @@ export const getSongTime = async accessToken => {
   return response.data.progress_ms
 }
 
-export const playSolo = async (startTime, accessToken) => {
-  await axios({
-    method: 'put',
-    url: `https://api.spotify.com/v1/me/player/seek?position_ms=${startTime}`,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  });
+let timeout;
+let interval;
 
-  await axios({
-    method: 'put',
-    url: 'https://api.spotify.com/v1/me/player/play',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  });
+export const playSolo = async (startingTime, endingTime, accessToken, loopActive) => {
+  if (timeout) clearTimeout(timeout)
+  if (interval) clearInterval(interval)
+
+  await seekPlayReq(startingTime, accessToken);
+
+  if (loopActive) {
+    interval = setInterval(() => {
+      seekPlayReq(startingTime, accessToken).then();
+      console.log(endingTime - startingTime)
+    }, (endingTime + 1000) - startingTime);
+  } else {
+    timeout = setTimeout(async () => {
+      await axios({
+        method: 'put',
+        url: 'https://api.spotify.com/v1/me/player/pause',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+    }, endingTime - startingTime);
+
+  }
 }
 
-let timeout;
+
+
 
 export const pauseSolo = async (accessToken, time) => {
   if (timeout) {
