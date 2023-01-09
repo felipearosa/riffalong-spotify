@@ -1,6 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { authActions } from "../../store/auth";
 
@@ -22,9 +21,9 @@ const Logout = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+    <div className="d-flex justify-content-end align-items-center" style={{ minHeight: '100vh' }}>
       <a onClick={logoutHandler} className="btn btn-success btn-lg">Logout</a>
-    </Container>
+    </div>
   )
 }
 
