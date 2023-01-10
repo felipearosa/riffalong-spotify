@@ -9,6 +9,7 @@ import Search from "./pages/Search";
 import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
 import './styles/index.css'
+import Footer from "./components/Layout/Footer";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/search" exact element={<Search />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
+      <Footer />
     </Fragment>
   );
 }

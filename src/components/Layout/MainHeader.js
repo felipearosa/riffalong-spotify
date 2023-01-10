@@ -16,7 +16,7 @@ const MainHeader = () => {
   )
 
   return (
-    <header className={classes.header}>
+    <div className={classes.header}>
       <nav>
         <ul>
           <li>
@@ -31,7 +31,7 @@ const MainHeader = () => {
           </li>
         </ul>
       </nav>
-    </header>
+    </div>
   );
 };
 

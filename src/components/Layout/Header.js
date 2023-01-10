@@ -1,3 +1,4 @@
+import SearchBar from '../UI/SearchBar';
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -42,8 +43,9 @@ const Header = () => {
           <span>N</span>
           <span>&nbsp;</span>
           <span>G</span></h2>
-
+          <SearchBar />
       </div>
+      <div></div>
     </header>
   )
 }
