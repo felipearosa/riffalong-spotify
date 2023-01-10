@@ -3,6 +3,8 @@
   height: 5rem;
   background-color: #000000;
   padding: 0 10%;
+  position: sticky;
+  z-index: 1;
 }
 
 .header nav {

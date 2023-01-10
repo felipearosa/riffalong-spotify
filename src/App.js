@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Fragment } from "react";
 
 import MainHeader from "./components/Layout/MainHeader";
-import Home from "./Home";
+import Home from "./pages/Home";
 import Song from "./pages/Song";
 import Search from "./pages/Search";
 import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
+import './styles/index.css'
+import Footer from "./components/Layout/Footer";
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         <Route path="/search" exact element={<Search />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
       </Routes>
+      <Footer />
     </Fragment>
   );
 }
