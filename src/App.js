@@ -3,11 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Fragment } from "react";
 
 import MainHeader from "./components/Layout/MainHeader";
-import Home from "./Home";
+import Home from "./pages/Home";
 import Song from "./pages/Song";
 import Search from "./pages/Search";
 import Dashboard from "./components/UI/Dashboard";
 import useCheckLogin from "./hooks/useCheckLogin";
+import './styles/index.css'
 
 
 function App() {
